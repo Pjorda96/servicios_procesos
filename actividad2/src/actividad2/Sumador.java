@@ -22,7 +22,7 @@ public class Sumador {
 		int n2 = Integer.parseInt(args[1]);
 		String id = args[2];
 		int resultado = sumador.sumar(n1, n2);		
-		FileWriter fileWriter = new FileWriter("sumador_" + id + ".txt");
+		FileWriter fileWriter = new FileWriter("sumador_" + id + "1.txt");
 		PrintWriter printWriter = new PrintWriter(fileWriter);
 		printWriter.print(resultado);		
 		printWriter.close();

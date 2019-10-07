@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class LanzadorProcesos {
 
-	// método para lanzar procesos sin parámetros
+	// mï¿½todo para lanzar procesos sin parï¿½metros
 	public void lanzar(String clase) {		
 		ProcessBuilder pb;
 		try {
@@ -21,13 +21,13 @@ public class LanzadorProcesos {
 		}
 	}
 	
-	// método para lanzar sumadores
+	// mï¿½todo para lanzar sumadores
 	public void lanzarSumador(String id, String n1, String n2) {
 		ProcessBuilder pb;
 		try {
 			pb = new ProcessBuilder("java", "-cp", "bin", "ejemplos.Sumador", n1, n2, id);
-			pb.redirectError(new File("error_" + id + ".txt"));
-			pb.redirectOutput(new File("salida_" + id +".txt"));
+			pb.redirectError(new File("error_" + id + "1.txt"));
+			pb.redirectOutput(new File("salida_" + id +"1.txt"));
 			pb.start();			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -36,20 +36,20 @@ public class LanzadorProcesos {
 	}
 	
 	public void ejercicio1() throws IOException, InterruptedException {
-		// creamos un fichero de sincronización por cada proceso que vayamos a crear
-		// mientras estos ficheros existan, los procesos estarán en marcha.
-		// Cada proceso cargado, se encargará de eliminar su fichero de sincronización
+		// creamos un fichero de sincronizaciï¿½n por cada proceso que vayamos a crear
+		// mientras estos ficheros existan, los procesos estarï¿½n en marcha.
+		// Cada proceso cargado, se encargarï¿½ de eliminar su fichero de sincronizaciï¿½n
 		// cuando acabe
 		File file1 = new File("sumador_1.lock");
 		File file2 = new File("sumador_2.lock");
 		file1.createNewFile();
 		file2.createNewFile();
 		// lanzamos los sumadores
-		this.lanzarSumador("1", "1", "10");
+		this.lanzarSumador("1.txt", "1.txt", "10");
 		this.lanzarSumador("2", "10", "20");
-		// esperamos a que los procesos acaben y hayan escrito y cerrado los ficheros donde estará su salida
+		// esperamos a que los procesos acaben y hayan escrito y cerrado los ficheros donde estarï¿½ su salida
 		// cuando un proceso acaba, borra su fichero .lock, por lo tanto, para saber si un proceso 
-		// ha acabado, debemos mirar si el fichero .lock de ese proceso aún existe.
+		// ha acabado, debemos mirar si el fichero .lock de ese proceso aï¿½n existe.
 		while(file1.isFile() || file2.isFile()) {
 			System.out.println("Esperando a que terminen los sumadores");
 			Thread.sleep(200);
@@ -59,7 +59,7 @@ public class LanzadorProcesos {
 		BufferedReader reader = new BufferedReader(new FileReader("sumador_1.txt"));
 		String currentLine;		
 		while((currentLine = reader.readLine()) != null) {
-			System.out.println("Resultado sumador 1 = " + currentLine);				
+			System.out.println("Resultado sumador 1.txt = " + currentLine);
 		}
 		reader.close();				
 		reader = new BufferedReader(new FileReader("sumador_2.txt"));				
