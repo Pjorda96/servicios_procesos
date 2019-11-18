@@ -5,13 +5,16 @@ public class Lanzador {
 
 	public static void main(String[] args) throws InterruptedException {
 		Restaurante restaurante = new Restaurante(N_SILLA);
-		
-		while(true) {
-			Cliente cliente = new Cliente(restaurante);
+		Cocina cocina = new Cocina(restaurante);
+
+		int clientes = 0;
+
+		while(clientes < 10) {
+			Cliente cliente = new Cliente(restaurante, cocina);
 			Thread threadCliente = new Thread(cliente);
 			threadCliente.start();
 			Thread.sleep(1750);
+			clientes++;
 		}
 	}
-
 }
