@@ -1,15 +1,27 @@
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 
-public class Reina {
-    public BlockingQueue<Integer> obrera;
-    public BlockingQueue<Integer> cuidadora;
-    public BlockingQueue<Integer> guerrera;
+public class Reina implements Runnable {
+    public BlockingQueue<String> obrera;
+    public BlockingQueue<String> cuidadora;
+    public BlockingQueue<String> guerrera;
 
     Reina() {
-        obrera = new LinkedBlockingDeque<Integer>();
-        cuidadora = new LinkedBlockingDeque<Integer>();
-        guerrera = new LinkedBlockingDeque<Integer>();
+        obrera = new LinkedBlockingDeque<String>();
+        cuidadora = new LinkedBlockingDeque<String>();
+        guerrera = new LinkedBlockingDeque<String>();
+    }
+
+    @Override
+    public void run() {
+        while (true) {
+            try {
+                ponerHuevo();
+                incubarHuevo();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void ponerHuevo() throws InterruptedException {
@@ -17,11 +29,11 @@ public class Reina {
             long egg = (long)Math.random() * 3;
 
             if (egg < 1) {
-                obrera.put((int)egg);
+                obrera.put("huevo obrera");
             } else if (egg < 2) {
-                cuidadora.put((int)egg);
+                cuidadora.put("huevo cuidadora");
             } else {
-                guerrera.put((int)egg);
+                guerrera.put("huevo guerrera");
             }
 
             incubarHuevo();
@@ -31,6 +43,6 @@ public class Reina {
     }
 
     private void incubarHuevo() throws InterruptedException {
-        Thread.sleep((long)(Math.random() * 500) + 100);
+        Thread.sleep((long)(Math.random() * (500 - 100) + 100));
     }
 }
