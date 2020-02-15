@@ -5,8 +5,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class ClienteThread implements Runnable {
