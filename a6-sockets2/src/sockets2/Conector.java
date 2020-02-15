@@ -11,7 +11,7 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 
 public class Conector {
-	
+
 	public static void main(String[] args) {
 		String destino = "www.google.com";
 		int puertoDestino = 80;
@@ -19,18 +19,21 @@ public class Conector {
 		InetSocketAddress direccion = new InetSocketAddress(destino, puertoDestino);
 		try {
 			socket.connect(direccion);
-			// si llegamos aquí, la conexión funcionó
+			// Si llegamos aquï¿½, es que la conexiï¿½n sï¿½ se hizo.
 			InputStream is = socket.getInputStream();
 			OutputStream os = socket.getOutputStream();
+			// Flujos que manejan caracteres
 			InputStreamReader isr = new InputStreamReader(is);
 			OutputStreamWriter osw = new OutputStreamWriter(os);
+
+			// Flujos de lï¿½neas
 			BufferedReader bReader = new BufferedReader(isr);
 			PrintWriter pWriter = new PrintWriter(osw);
-			
+
 			pWriter.println("GET /index.html");
 			pWriter.flush();
-			String linea;
-			while((linea = bReader.readLine()) != null) {
+			String linea;			
+			while ((linea = bReader.readLine()) != null) {				
 				System.out.println(linea);
 			}
 			pWriter.close();
@@ -40,9 +43,8 @@ public class Conector {
 			is.close();
 			os.close();
 			socket.close();
-			
 		} catch (IOException e) {
-			System.out.println("Conexión fallida");
+			System.out.println("No se pudo establecer la conexion " + " o hubo un fallo al leer datos.");
 		}
 	}
 }

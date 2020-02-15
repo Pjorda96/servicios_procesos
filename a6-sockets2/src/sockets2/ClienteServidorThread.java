@@ -1,25 +1,23 @@
 package sockets2;
 
-import marke.Cliente;
-
-public class ClienteServidor {
+public class ClienteServidorThread {
 
 	public static void main(String[] args) throws InterruptedException {
-		Servidor servidor = new Servidor();
+		ServidorThread servidor = new ServidorThread();
 		Thread threadServidor = new Thread(servidor);
 		threadServidor.start();
 		int contCliente = 0;
 		while(true) {
-			marke.Cliente cliente = new marke.Cliente();
+			ClienteThread cliente = new ClienteThread();
 			Thread threadCliente = new Thread(cliente);
 			threadCliente.setName("" + contCliente);
 			threadCliente.start();
 			contCliente++;
-			marke.Cliente cliente2 = new Cliente();
+			ClienteThread cliente2 = new ClienteThread();
 			Thread threadCliente2 = new Thread(cliente2);
 			threadCliente2.setName("" + contCliente);
 			threadCliente2.start();
-			
+
 			threadCliente.join();
 			threadCliente2.join();
 			System.out.println("Acaban los dos hilos");
