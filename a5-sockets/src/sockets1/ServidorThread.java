@@ -15,8 +15,6 @@ public class ServidorThread implements Runnable {
 
 	@Override
 	public void run() {
-		int counter = 0;
-
 		System.out.println("Arrancado el servidor");
 		ServerSocket socketEscucha = null;
 		try {
@@ -34,19 +32,16 @@ public class ServidorThread implements Runnable {
 				BufferedReader bf = new BufferedReader(isr);
 				String peticion = bf.readLine();
 
-				List<String> params = new ArrayList<>();
+				int resultado = 0;
 
 				while(!peticion.contentEquals("fin")) {
-					this.getParam(peticion, counter);
-					params.add(peticion);
+					this.getParams(peticion.split(" "));
+
+					resultado = getResult(peticion);
 
 					System.out.println("Peticion recibida en servidor: " + peticion);
 					peticion = bf.readLine();
-
-					counter++;
 				}
-
-				int resultado = getResult(params);
 
 				OutputStream os = conexion.getOutputStream();
 				PrintWriter pw = new PrintWriter(os);
@@ -59,23 +54,17 @@ public class ServidorThread implements Runnable {
 		}		
 	}
 
-	public void getParam(String param, int counter) throws NumberFormatException {
-		String order;
-
-		switch (counter) {
-			case 0: order = "primer"; break;
-			case 1: order = "segundo"; break;
-			case 2: order = "tercer"; break;
-			default: order = "siguiente";
-		}
-
-		System.out.println("El " + order + " elemento es: " + param);
+	public void getParams(String[] params) throws NumberFormatException {
+		System.out.println("El primer elemento es: " + params[0]);
+		System.out.println("El segundo elemento es: " + params[1]);
+		System.out.println("El tercer elemento es: " + params[2]);
 	}
 
-	public int getResult(List<String> params) {
-		int first = Integer.parseInt(params.get(0));
-		String operando = params.get(1);
-		int second = Integer.parseInt(params.get(2));
+	public int getResult(String param) {
+		String[] params = param.split(" ");
+		int first = Integer.parseInt(params[0]);
+		String operando = params[1];
+		int second = Integer.parseInt(params[2]);
 
 		if (operando.equals("sum")) return first + second;
 		else return first - second;

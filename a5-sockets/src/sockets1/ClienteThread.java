@@ -22,11 +22,9 @@ public class ClienteThread implements Runnable {
 			BufferedReader bfr = new BufferedReader(isr);
 			PrintWriter pw = new PrintWriter(socket.getOutputStream());
 
-			List<String> operacion = generarOperacion();
+			String operacion = generarOperacion();
 
-			pw.println(operacion.get(0));
-			pw.println(operacion.get(1));
-			pw.println(operacion.get(2));
+			pw.println(operacion);
 			pw.println("fin");
 			pw.flush();
 			String resultado = bfr.readLine();
@@ -37,18 +35,18 @@ public class ClienteThread implements Runnable {
 		}		
 	}
 
-	public List<String> generarOperacion() {
-		List<String> operacion = new ArrayList<>();
+	public String generarOperacion() {
+		String operacion = "";
 		Random rd1 = new Random();
 		Random rd2 = new Random();
 		Random rd3 = new Random();
 
-		operacion.add("" + rd1.nextInt(100) + 1);
+		operacion += (rd1.nextInt(100) + 1);
 
-		if (rd2.nextInt(100) + 1 <= 50) operacion.add("sum");
-		else operacion.add("res");
+		if (rd2.nextInt(100) + 1 <= 50) operacion += " sum ";
+		else operacion += " res ";
 
-		operacion.add("" + rd3.nextInt(100) + 1);
+		operacion += (rd3.nextInt(100) + 1);
 
 		return operacion;
 	}
