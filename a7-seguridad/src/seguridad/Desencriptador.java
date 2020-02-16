@@ -44,14 +44,14 @@ public class Desencriptador {
 		char e = charMax.get();
 
 		int desplazamiento = e - 32;//El espacio en blanco es el carácter más repetido en el español escrito (13 espacios, 11 'e')
-		String decriptedText = "";
+		String decryptedText = "";
 
 		for(int i = 0; i < text.length(); i++) {
-			char decriptedChar = (char) ((int) text.charAt(i) - desplazamiento);
-			decriptedText += decriptedChar;
+			char decryptedChar = (char) ((int) text.charAt(i) - desplazamiento);
+			decryptedText += decryptedChar;
 		}
 
-		System.out.println(decriptedText);
+		System.out.println(decryptedText);
 	}
 	
 }
