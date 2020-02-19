@@ -1,4 +1,5 @@
-import java.io.*;
+package examen2;
+
 import java.net.Socket;
 
 public class Worker implements Runnable {

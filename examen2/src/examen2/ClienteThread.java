@@ -1,3 +1,5 @@
+package examen2;
+
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
@@ -7,7 +9,7 @@ public class ClienteThread implements Runnable {
 	public void run() {
 		String message = "Hola que tal?";
 		InetSocketAddress direccion = new InetSocketAddress("localhost", 9876);
-		Socket socket = new Socket();		
+		Socket socket = new Socket();
 		try {
 			GestorCifrado gestorCif = new GestorCifrado();
 			socket.setReuseAddress(true);

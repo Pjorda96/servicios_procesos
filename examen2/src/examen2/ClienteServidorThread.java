@@ -1,3 +1,5 @@
+package examen2;
+
 import javax.crypto.NoSuchPaddingException;
 import java.security.NoSuchAlgorithmException;
 
